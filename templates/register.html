@@ -1,0 +1,59 @@
+{% extends 'template.html'%}
+{% block content %}
+
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} text-center">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card shadow-lg p-4" style="width: 100%; max-width: 450px; border-radius: 16px;">
+ <img style="width: 50px;" class="logo_welcome" src="../static/images/tbc-logo.png" alt="">
+    <h3 class="text-center mb-4">Create Account</h3>
+    <p class="text-center text-muted mb-4">Join us by filling out the form below</p>
+
+    <form method="POST">
+
+  
+      <div class="mb-3">
+        <label class="form-label">Email address</label>
+        <input required name="exampleInputEmail1" type="email" class="form-control form-control-lg" placeholder="Enter your email">
+      </div>
+
+   
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input required name="usernameInput" type="text" class="form-control form-control-lg" placeholder="Choose a username">
+      </div>
+
+     
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input required name="exampleInputPassword1" type="password" class="form-control form-control-lg" placeholder="Create a password">
+      </div>
+
+  
+      <div class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">
+          I agree to the terms & conditions
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 btn-lg">
+        Sign Up
+      </button>
+
+    </form>
+  </div>
+</div>
+
+{% include 'footer.html'%}
+{% endblock %}

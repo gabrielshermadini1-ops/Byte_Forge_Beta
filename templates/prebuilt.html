@@ -1,0 +1,96 @@
+{% extends 'template.html'%}
+{% block content %}
+
+
+<div class="prebuilt-page">
+    <div class="prebuilt-hero">
+        <h1>Pre-Built PCs</h1>
+        <p>Hand-picked configurations. Ready to order.</p>
+    </div>
+
+    <div class="prebuilt-grid">
+        {% for build in builds %}
+        <div class="prebuilt-card">
+
+            <div class="prebuilt-badge">
+                {% if build.total_score >= 40 %}
+                    <span class="badge beast">BEAST</span>
+                {% elif build.total_score >= 25 %}
+                    <span class="badge mid">MID-RANGE</span>
+                {% else %}
+                    <span class="badge budget">BUDGET</span>
+                {% endif %}
+            </div>
+
+            <div class="prebuilt-img-wrap">
+                <img src="{{ build.image_url }}" alt="{{ build.name }}">
+            </div>
+
+            <div class="prebuilt-info">
+                <h2>{{ build.name }}</h2>
+                <p class="prebuilt-desc">{{ build.description }}</p>
+
+                <div class="prebuilt-parts">
+                    {% if build.gpu %}
+                    <div class="part-row">
+                        <span class="part-label">GPU</span>
+                        <span class="part-val">{{ build.gpu.name }}</span>
+                    </div>
+                    {% endif %}
+                    {% if build.cpu %}
+                    <div class="part-row">
+                        <span class="part-label">CPU</span>
+                        <span class="part-val">{{ build.cpu.name }}</span>
+                    </div>
+                    {% endif %}
+                    {% if build.board %}
+                    <div class="part-row">
+                        <span class="part-label">Board</span>
+                        <span class="part-val">{{ build.board.name }}</span>
+                    </div>
+                    {% endif %}
+                    {% if build.ram %}
+                    <div class="part-row">
+                        <span class="part-label">RAM</span>
+                        <span class="part-val">{{ build.ram.name }}</span>
+                    </div>
+                    {% endif %}
+                    {% if build.psu %}
+                    <div class="part-row">
+                        <span class="part-label">PSU</span>
+                        <span class="part-val">{{ build.psu.name }}</span>
+                    </div>
+                    {% endif %}
+                    {% if build.storage %}
+                    <div class="part-row">
+                        <span class="part-label">Storage</span>
+                        <span class="part-val">{{ build.storage.name }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="prebuilt-score-bar">
+                    <div class="score-fill" style="width: {{ [build.total_score * 2, 100] | min }}%"></div>
+                </div>
+                <div class="score-label">Score: {{ build.total_score }} / 50</div>
+
+                <div class="prebuilt-footer">
+                    <span class="prebuilt-price">თვეში-{{ build.total_price }}</span>
+                    <a href="{{ url_for('add_prebuilt_to_cart', build_id=build.id) }}" class="add-cart-btn">
+                        Add to Cart
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        {% else %}
+        <div class="no-builds">
+            <p>No pre-built configurations available yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% include 'footer.html'%}
+{% endblock %}

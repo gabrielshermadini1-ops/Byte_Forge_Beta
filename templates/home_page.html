@@ -1,0 +1,194 @@
+{% extends 'template.html'%}
+{% block content %}
+
+
+<div class="hp">
+
+
+  <div class="hp-hero">
+    <div class="hp-hero-left">
+      <h1 class="tst">Build your<br>dream PC<br><span>your way</span></h1>
+      <p>
+        Pick GPUs, CPUs, and motherboards. Compare two full builds
+        side by side and add everything to cart in one click —
+        parts up to <strong>50% off</strong>.
+      </p>
+      <div class="hp-hero-btns">
+        <a href="/pc-build" class="hp-btn-main">Start Building</a>
+        <a href="/gpu-shop" class="hp-btn-secondary">
+          <div class="hp-play">
+            <svg viewBox="0 0 12 12"><polygon points="2,1 11,6 2,11" fill="#fff"/></svg>
+          </div>
+          Browse Parts
+        </a>
+      </div>
+    </div>
+
+    <div class="hp-hero-right">
+      <div class="hp-part-grid">
+
+        <a href="/gpu-shop" class="hp-part-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#e86c1a" stroke-width="1.5">
+            <rect x="2" y="7" width="20" height="10" rx="2"/>
+            <path d="M6 7V5m4 2V5m4 2V5m4 2V5"/>
+            <path d="M6 17v2m4-2v2m4-2v2m4-2v2"/>
+          </svg>
+          <span>Graphics Cards</span>
+        </a>
+
+        <a href="/cpu-shop" class="hp-part-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#e86c1a" stroke-width="1.5">
+            <rect x="7" y="7" width="10" height="10" rx="1"/>
+            <path d="M9 3v4m6-4v4M9 17v4m6-4v4M3 9h4m-4 6h4m10-6h4m-4 6h4"/>
+          </svg>
+          <span>Processors</span>
+        </a>
+       <a href="/pcu-shop" class="hp-part-card">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#e86c1a" stroke-width="1.5">
+    <rect x="2" y="6" width="20" height="12" rx="1"/>
+    <circle cx="8" cy="12" r="3"/>
+    <line x1="14" y1="9" x2="22" y2="9"/>
+    <line x1="14" y1="12" x2="22" y2="12"/>
+    <line x1="14" y1="15" x2="22" y2="15"/>
+  </svg>
+  <span>PSU's</span>
+</a>
+<a href="/ram-shop" class="hp-part-card">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#e86c1a" stroke-width="1.5">
+    <rect x="4" y="6" width="16" height="10" rx="1"/>
+    <line x1="4" y1="16" x2="4" y2="19"/>
+    <line x1="7" y1="16" x2="7" y2="19"/>
+    <line x1="10" y1="16" x2="10" y2="19"/>
+    <line x1="13" y1="16" x2="13" y2="19"/>
+    <line x1="16" y1="16" x2="16" y2="19"/>
+    <line x1="19" y1="16" x2="19" y2="19"/>
+    <line x1="7" y1="6" x2="7" y2="9"/>
+    <line x1="10" y1="6" x2="10" y2="9"/>
+    <line x1="14" y1="6" x2="14" y2="9"/>
+    <line x1="17" y1="6" x2="17" y2="9"/>
+  </svg>
+  <span>RAM</span>
+</a>
+<a href="/storage-shop" class="hp-part-card">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#e86c1a" stroke-width="1.5">
+    <rect x="2" y="5" width="20" height="14" rx="1"/>
+    <rect x="5" y="8" width="5" height="5" rx="0.5"/>
+    <rect x="12" y="8" width="2" height="2" rx="0.5"/>
+    <rect x="15" y="8" width="2" height="2" rx="0.5"/>
+    <rect x="12" y="11" width="2" height="2" rx="0.5"/>
+    <rect x="15" y="11" width="2" height="2" rx="0.5"/>
+    <line x1="5" y1="16" x2="19" y2="16"/>
+  </svg>
+  <span>SSD</span>
+</a>
+        <a href="/board-shop" class="hp-part-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#e86c1a" stroke-width="1.5">
+            <rect x="2" y="3" width="20" height="18" rx="2"/>
+            <rect x="6" y="7" width="4" height="4"/>
+            <rect x="14" y="7" width="4" height="4"/>
+            <path d="M6 15h12"/>
+          </svg>
+          <span>Motherboards</span>
+        </a>
+
+        <a href="/pc-build" class="hp-part-card accent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5">
+            <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+          </svg>
+          <span>Build Now</span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="hp-cats">
+    <a href="/gpu-shop" class="hp-cat">Graphics Cards</a>
+    <a href="/cpu-shop" class="hp-cat">Processors</a>
+    <a href="/board-shop" class="hp-cat">Motherboards</a>
+    <a href="/pc-build" class="hp-cat">PC Builder</a>
+  </div>
+
+
+  <div class="hp-promo">
+    <a href="/gpu-shop" class="hp-promo-card blue">
+      <h3>Top GPUs 2024–2025</h3>
+      <p>RTX, RX, and beyond</p>
+      <span class="hp-promo-link">Shop now →</span>
+    </a>
+    <a href="/pc-build" class="hp-promo-card orange">
+      <h3>Compare two builds</h3>
+      <p>Score them head to head</p>
+      <span class="hp-promo-link">Open builder →</span>
+    </a>
+    <a href="/cpu-shop" class="hp-promo-card dark">
+      <h3>Best value CPUs</h3>
+      <p>Intel vs AMD — find your fit</p>
+      <span class="hp-promo-link">Shop now →</span>
+    </a>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- <div class="center">
+    <h1>Welcome</h1>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis sit dolores nostrum ab fugit cupiditate dolore doloremque, ipsa, rerum possimus libero necessitatibus, esse eos quo excepturi! Laborum, consequatur! Libero, voluptatem!</p>
+</div>
+  {% include 'card_welcome.html'%}
+<div class="center" style=" gap: 20px; text-align: center; display: flex;flex-direction: column; margin: 10% " >
+    <h1>მოგესალმებით!</h1>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia, amet est magni voluptatem, optio architecto facere quod sit laudantium soluta error impedit? Consequuntur esse quaerat repudiandae cum minus. Repellat, consequatur.</p>
+
+
+    <div id="carouselExampleCaptions"  class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner"style="border-radius: 20px;">
+            <div class="carousel-item active">
+                <img src="../static/images/nv.png" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Rizen Cpus Are Growing</h5>
+                    <p>By 2030 Ryzen Will beat Intel.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="../static/images/s.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Second slide label</h5>
+                    <p>Some representative placeholder content for the second slide.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="../static/images/D.jpg" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Third slide label</h5>
+                    <p>Some representative placeholder content for the third slide.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div> -->
+
+{% include 'footer.html'%}
+{% endblock %}

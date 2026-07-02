@@ -1,0 +1,102 @@
+{% extends 'template.html'%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage Shop</title>
+
+
+</head>
+
+<body>
+
+    <header>
+        <h1>მყარი დისკები</h1>
+        <span>{{ storages |length }} მეხსიერება </span>
+    </header>
+
+<div class="filters">
+    <button type="button" class="active" onclick="filterCards('all', this)">All</button>
+    <button type="button" onclick="filterCards('SAMSUNG', this)">SAMSUNG</button>
+    <button type="button" onclick="filterCards('Crucial', this)">Crucial</button>
+    <button type="button" onclick="filterCards('Seagate', this)">Seagate</button>
+    <button type="button" onclick="filterCards('Western Digital', this)">Western Digital</button>
+    <button type="button" onclick="filterCards('Kingston', this)">Kingston</button>
+
+    <form method="GET" action="{{ url_for('seed_storage') }}" class="price_filterDiv">
+        <label for="priceRange">Max Price: ₾ <span id="priceValue">{{ max_price or overall_max }}</span></label>
+        <input type="range" id="priceRange" name="max_price"
+               min="0" max="{{ overall_max }}" step="10"
+               value="{{ max_price or overall_max }}"
+               oninput="priceValue.textContent = this.value">
+
+        <label for="yearRange">Max Year: <span id="yearValue">{{ max_year or overall_max_year }}</span></label>
+        <input type="range" id="yearRange" name="max_year"
+               min="{{ overall_min_year }}" max="{{ overall_max_year }}" step="1"
+               value="{{ max_year or overall_max_year }}"
+               oninput="yearValue.textContent = this.value">
+
+        <button type="submit">ფილტრი!</button>
+    </form>
+</div>
+
+    <div class="grid" id="gpu-grid">
+        {% for storage in storages %}
+        <div class="card" data-brand="{{ storage.brand }}">
+            <div class="card-img">
+                <img src="{{ storage.image_url }}" alt="{{ storage.name }}"
+                    onerror="this.classList.add('error'); this.nextElementSibling.style.display='block'">
+                <div class="fallback">🖥️ Image</div>
+            </div>
+            <div class="card-body">
+                <div class="card-brand">{{ storage.brand }}</div>
+                <div class="card-name">{{ storage.name }}</div>
+                <div class="card-stats">
+                    <div class="stat"><span>Power</span><span>{{ storage.power_watt }}W</span></div>
+                    <div class="stat"><span>Released</span><span>{{ storage.release_date }}</span></div>
+                    <div class="stat"><span>Score</span><span>{{ storage.power_score }}/10</span></div>
+               
+                    <div class="stat"><span>Used-Score</span><span class="stat-grade-{{storage.used_stat}}">{{ storage.used_stat }}</span></div>
+                </div>
+                <div class="score-bar">
+                    <div class="score-fill" style="width: {{ (storage.power_score / 10 * 100)|int }}%"></div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="price"> ₾{{ storage.price }}</div>
+               <a href="{{url_for('add_to_cart', part_type='storage', part_id=storage.id)}}"><button class="buy-btn">Add to Cart</button></a> 
+               
+            </div>
+                <div class="slot_add">
+ <a href="{{url_for('use_part',part_type='storage',part_id =storage.id, slot = 1 )}}" class="use_btn">Add to Slot 1</a>
+                <a href="{{url_for('use_part',part_type='storage',part_id =storage.id, slot = 2 )}}" class="use_btn">Add to Slot 2</a>
+                </div>
+         
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+      function filterCards(brand, btn) {
+    document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('.card').forEach(card => {
+        const cardBrand = card.dataset.brand.toLowerCase();
+        const filterBrand = brand.toLowerCase();
+
+        card.style.display =
+            (brand === 'all' || cardBrand.includes(filterBrand))
+            ? ''
+            : 'none';
+    });
+}
+    </script>
+    </body>
+
+</html>
+    {% include 'footer.html'%}
+    {% endblock %}

@@ -1,0 +1,136 @@
+{% extends 'template.html' %}
+{% block content %}
+
+<style>
+      .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    padding: 40px 60px;
+  }
+
+  .hp-part-card {
+    background-color: #343842;
+    border: 1px solid #c0c0c0;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px 16px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+ body.dark-theme .hp-part-card {
+    background-color: #62656d;
+    border: 1px solid #d4d4d4;
+
+  }
+
+  .hp-part-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 28px rgba(232, 108, 26, 0.25);
+    border-color: #e86c1a;
+  }
+
+  .hp-part-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    background-color: #0f0f1a;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 14px;
+  }
+
+  .hp-part-card h3 {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .hp-part-card p {
+    color: #e86c1a;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+
+  .hp-part-card a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #e86c1a;
+    color: #fff;
+    text-decoration: none;
+    padding: 9px 0;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    margin-top: auto;
+  }
+
+  .hp-part-card a:hover {
+    background-color: #cf5a10;
+  }
+</style>
+
+<div class="products-grid">
+
+
+{% for gpu in gpus %}
+
+  <div class="hp-part-card">
+    <img src="{{ gpu.image_url }}" alt="{{ gpu.name }}">
+    <h3>{{ gpu.name }}</h3>
+    <p>${{ gpu.price }}</p>
+    <a href="/add-to-cart/gpu/{{ gpu.id }}">Add to Cart</a>
+  </div>
+{% endfor %}
+{% for cpu in cpus %}
+  <div class="hp-part-card">
+    <img src="{{ cpu.image_url }}" alt="{{ cpu.name }}">
+    <h3>{{ cpu.name }}</h3>
+    <p>${{ cpu.price }}</p>
+    <a href="/add-to-cart/cpu/{{ cpu.id }}">Add to Cart</a>
+  </div>
+{% endfor %}
+{% for board in boards %}
+  <div class="hp-part-card">
+    <img src="{{ board.image_url }}" alt="{{ board.name }}">
+    <h3>{{ board.name }}</h3>
+    <p>${{ board.price }}</p>
+    <a href="/add-to-cart/board/{{ board.id }}">Add to Cart</a>
+  </div>
+{% endfor %}
+{% for ram in rams %}
+  <div class="hp-part-card">
+    <img src="{{ ram.image_url }}" alt="{{ ram.name }}">
+    <h3>{{ ram.name }}</h3>
+    <p>${{ ram.price }}</p>
+    <a href="/add-to-cart/ram/{{ ram.id }}">Add to Cart</a>
+  </div>
+{% endfor %}
+{% for psu in psus %}
+  <div class="hp-part-card">
+    <img src="{{ psu.image_url }}" alt="{{ psu.name }}">
+    <h3>{{ psu.name }}</h3>
+    <p>${{ psu.price }}</p>
+    <a href="/add-to-cart/psu/{{ psu.id }}">Add to Cart</a>
+  </div>
+{% endfor %}
+
+{% for storage in storages %}
+  <div class="hp-part-card">
+    <img src="{{ storage.image_url }}" alt="{{ storage.name }}">
+    <h3>{{ storage.name }}</h3>
+    <p>${{ storage.price }}</p>
+    <a href="/add-to-cart/storage/{{ storage.id }}">Add to Cart</a>
+  
+  </div>
+{% endfor %}
+</div>
+{% include 'footer.html' %}
+{% endblock %}

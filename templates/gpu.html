@@ -1,0 +1,93 @@
+{% extends 'template.html'%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPU Shop</title>
+
+
+</head>
+
+<body>
+
+    <header>
+        <h1>ვიდეოკარტები</h1>
+        <span>{{ gpus|length }} ვიდეოკარტა</span>
+    </header>
+
+<div class="filters">
+    <button type="button" class="active" onclick="filterCards('all', this)">All</button>
+    <button type="button" onclick="filterCards('NVIDIA', this)">NVIDIA</button>
+    <button type="button" onclick="filterCards('AMD', this)">AMD</button>
+
+    <form method="GET" action="{{ url_for('seed_gpus') }}" class="price_filterDiv">
+        <label for="priceRange">Max Price:  ₾ <span id="priceValue">{{ max_price or overall_max }}</span></label>
+        <input type="range" id="priceRange" name="max_price"
+               min="0" max="{{ overall_max }}" step="10"
+               value="{{ max_price or overall_max }}"
+               oninput="priceValue.textContent = this.value">
+
+        <label for="yearRange">Max Year: <span id="yearValue">{{ max_year or overall_max_year }}</span></label>
+        <input type="range" id="yearRange" name="max_year"
+               min="{{ overall_min_year }}" max="{{ overall_max_year }}" step="1"
+               value="{{ max_year or overall_max_year }}"
+               oninput="yearValue.textContent = this.value">
+
+        <button type="submit">ფილტრი!</button>
+    </form>
+</div>
+
+    <div class="grid" id="gpu-grid">
+        {% for gpu in gpus %}
+        <div class="card" data-brand="{{ gpu.brand }}">
+            <div class="card-img">
+                <img src="{{ gpu.image_url }}" alt="{{ gpu.name }}"
+                    onerror="this.classList.add('error'); this.nextElementSibling.style.display='block'">
+                <div class="fallback">🖥️ Image</div>
+            </div>
+            <div class="card-body">
+                <div class="card-brand">{{ gpu.brand }}</div>
+                <div class="card-name">{{ gpu.name }}</div>
+                <div class="card-stats">
+                    <div class="stat"><span>Power</span><span>{{ gpu.power_watt }}W</span></div>
+                    <div class="stat"><span>Released</span><span>{{ gpu.release_date }}</span></div>
+                    <div class="stat"><span>Score</span><span>{{ gpu.power_score }}/10</span></div>
+               
+                    <div class="stat"><span>Used-Score</span><span class="stat-grade-{{gpu.used_stat}}">{{ gpu.used_stat }}</span></div>
+                </div>
+                <div class="score-bar">
+                    <div class="score-fill" style="width: {{ (gpu.power_score / 10 * 100)|int }}%"></div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="price"> ₾{{ gpu.price }}</div>
+               <a href="{{url_for('add_to_cart', part_type='gpu', part_id=gpu.id)}}"><button class="buy-btn">Add to Cart</button></a> 
+               
+            </div>
+                <div class="slot_add">
+ <a href="{{url_for('use_part',part_type='gpu',part_id =gpu.id, slot = 1 )}}" class="use_btn">Add to Slot 1</a>
+                <a href="{{url_for('use_part',part_type='gpu',part_id =gpu.id, slot = 2 )}}" class="use_btn">Add to Slot 2</a>
+                </div>
+         
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function filterCards(brand, btn) {
+            document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+            
+            btn.classList.add('active');
+            document.querySelectorAll('.card').forEach(card => {
+                card.style.display = (brand === 'all' || card.dataset.brand === brand) ? '' : 'none';
+            });
+        }
+    </script>
+    {% include 'footer.html'%}
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+{% extends 'template.html' %}
+{% block content %}
+
+<div class="admin-form-page">
+    <h1>{{ 'Edit' if product else 'Add' }} {{ part_type | upper }}</h1>
+
+    <form method="POST" class="admin-form">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" value="{{ product.name if product else '' }}" required>
+        </div>
+        <div class="form-group">
+            <label>Brand</label>
+            <input type="text" name="brand" value="{{ product.brand if product else '' }}" required>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Price ( ₾)</label>
+                <input type="number" step="0.01" name="price" value="{{ product.price if product else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label>Power score</label>
+                <input type="number" step="0.1" name="power_score" value="{{ product.power_score if product else '' }}" required>
+            </div>
+            <div class="form-group">
+                <label>Power (W)</label>
+                <input type="number" step="0.1" name="power_watt" value="{{ product.power_watt if product else '' }}" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Release year</label>
+                <input type="text" name="release_date" value="{{ product.release_date if product else '' }}" placeholder="2024" required>
+            </div>
+            <div class="form-group">
+                <label>Condition</label>
+                <input type="text" name="used_stat" value="{{ product.used_stat if product else '' }}" placeholder="New / Used" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" name="image_url" value="{{ product.image_url if product else '' }}" required>
+        </div>
+        <div class="form-btns">
+            <button type="submit" class="admin-save-btn">Save</button>
+            <a href="/admin" class="admin-cancel-btn">Cancel</a>
+        </div>
+    </form>
+</div>
+{% include 'footer.html' %}
+{% endblock %}

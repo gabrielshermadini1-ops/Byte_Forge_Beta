@@ -1,0 +1,45 @@
+{% extends 'template.html' %}
+{% block content %}
+
+<div class="cart-page">
+  <h1>Your cart</h1>
+
+  <div class="cart-list">
+    {% for p in products %}
+    <div class="cart-item">
+      <img src="{{ p.image_url }}" alt="{{ p.name }}">
+      <div class="item-info">
+        <div class="item-name">{{ p.name }}</div>
+        <div class="item-type">{{ p.type }}</div>
+        <div class="item-price"> ₾{{ "%.2f"|format(p.price) }}</div>
+      </div>
+      <a class="remove-btn" href="{{ url_for('remove_Product_From_Cart', item_id=p.cart_id) }}">
+        Remove
+      </a>
+    </div>
+    {% else %}
+    <div class="cart-empty">Your cart is empty.</div>
+    {% endfor %}
+  </div>
+
+  {% if products %}
+  <div class="summary-card">
+    <div class="summary-row">
+      <span class="summary-label">Items ({{ products|length }})</span>
+      <span class="summary-value"> ₾{{ "%.2f"|format(total) }}</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Shipping</span>
+      <span class="summary-value free">Free</span>
+    </div>
+    <div class="total-row">
+      <span class="total-label">Total</span>
+      <span class="total-value"> ₾{{ "%.2f"|format(total) }}</span>
+    </div>
+    <button class="buy-btn">Checkout</button>
+  </div>
+  {% endif %}
+</div>
+
+{% include 'footer.html' %}
+{% endblock %}

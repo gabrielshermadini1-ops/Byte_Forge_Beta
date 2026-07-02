@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container-fluid">
+        <a href="/"><img class="navbar-brand" src="../static/assetss/new-logo.png"
+                alt="../static/assetss/pc-shop.png"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Main-Page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pc-build">Build Pc</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/prebuilt-shop">Pre-Built</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Pc-Components
+                    </a>
+                    <ul class="dropdown-menu" style="background-color: rgb(255, 255, 255);">
+                        <li><a style=" font-weight: bolder;" class="dropdown-item" href="/gpu-shop">Gpu <img
+                                    style="margin-left: 30%; width: 36%; height: 36%;"
+                                    src="https://www.gigabyte.com/FileUpload/global/News/1875/o202101121711161557.png"
+                                    alt=""></a></li>
+                        <li><a style=" font-weight: bolder;" class="dropdown-item" href="/cpu-shop">Cpu <img
+                                    style="margin-left: 30%; width: 36%; height: 40%;"
+                                    src="https://citycenter.jo/image/infopages/Ryzen3/Ryzen/Ryzen7Box.png" alt=""></a>
+                        </li>
+                        <li><a style=" font-weight: bolder;" class="dropdown-item" href="/board-shop">Board<img
+                                    style="margin-left: 30%; width: 36%; height: 40%;"
+                                    src="https://www.gigabyte.com/FileUpload/Global/KeyFeature/3840/innergigabyte/images/product/summary.png"
+                                    alt=""></a></li>
+                        <li><a style=" font-weight: bolder;" class="dropdown-item" href="/ram-shop">Ram<img
+                                    style="margin-left: 30%; width: 36%; height: 40%;"
+                                    src="https://png.pngtree.com/png-vector/20241109/ourmid/pngtree-green-circuit-board-ram-module-showcasing-integrated-memory-chips-and-gold-png-image_14339322.png"
+                                    alt=""></a></li>
+                        <li><a style=" font-weight: bolder;" class="dropdown-item" href="/pcu-shop">Power <img
+                                    style="margin-left: 30%; width: 36%; height: 40%;"
+                                    src="https://png.pngtree.com/png-clipart/20231014/original/pngtree-power-supply-electric-picture-image_13156223.png"
+                                    alt=""></a></li>
+                        <li><a style=" font-weight: bolder;" class="dropdown-item" href="/storage-shop">Storage<img
+                                    style="margin-left: 30%; width: 36%; height: 40%;"
+                                    src="https://pngimg.com/uploads/hard_disc/hard_disc_PNG102034.png" alt=""></a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/all_products">More Parts...</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about-page">About Us</a>
+                </li>
+              {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link">LogOut</a>
+                </li>
+                {% if current_user.is_admin %}
+                <li class="nav-item">
+                    <a href="/admin" class="nav-link">Admin Panel</a>
+                </li>
+                {% endif %}
+                {% else %}
+                <li class="nav-item">
+                    <a href="/login" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/register" class="nav-link">Register</a>
+                </li>
+                {% endif %}
+              
+              
+
+
+
+            </ul>
+            <button id="theme-btn" class="floating-theme-btn">
+                🌙
+            </button>
+            <button id="theme-btn" class="floating-theme-btn1">
+                 <a href="https://tbcbank.ge/en"><img style="width: 40px;" class="tbc-logo"  src="../static/images/tbc-logo.png" alt=""></a> 
+            </button>
+        </div>
+    </div>
+</nav>

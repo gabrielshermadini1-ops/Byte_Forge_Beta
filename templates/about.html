@@ -1,0 +1,181 @@
+{% extends 'template.html' %}
+{% block content %}
+
+<style>
+  .about-hero {
+    text-align: center;
+    padding: 70px 20px 40px;
+    background: linear-gradient(135deg, #5a0b08, #3e3e49);
+    border-bottom: 1px solid #000000;
+  }
+  body.dark-theme .about-hero {
+    transition: 400ms;
+    background: linear-gradient(135deg, #3b0604, #3e3e49);
+   
+  }
+
+  .about-hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+
+  .about-hero p {
+    font-size: 1.1rem;
+    color: #d3d3d3;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+ body.dark-theme .about-hero p {
+    font-weight: bold;
+    color: #ffffff;
+
+  }
+
+  .about-cards {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 50px 20px;
+    background: #0f0f1a;
+  }
+
+  .about-card {
+    background: #1a1a2e;
+    border: 1px solid #2a2a3e;
+    border-radius: 16px;
+    padding: 34px 28px;
+    width: 230px;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .about-card:hover {
+    transform: translateY(-6px);
+    border-color: #e63946;
+  }
+
+  .about-card .icon {
+    font-size: 2.8rem;
+    margin-bottom: 14px;
+  }
+
+  .about-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .about-card p {
+    font-size: 0.87rem;
+    color: #999;
+    line-height: 1.6;
+  }
+
+  .about-team {
+    text-align: center;
+    padding: 50px 20px 70px;
+    background: #0f0f1a;
+    border-top: 1px solid #2a2a3e;
+  }
+
+  .about-team h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 36px;
+  }
+
+  .team-members {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .member {
+    background: #3a0e0c;
+    border: 1px solid #2a2a3e;
+    border-radius: 16px;
+    padding: 30px 24px;
+    width: 180px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .member:hover {
+    transform: translateY(-6px);
+    border-color: #ff7b00;
+  }
+
+  .member .avatar {
+    font-size: 3rem;
+    margin-bottom: 12px;
+  }
+
+  .member h4 {
+    font-size: 0.95rem;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .member span {
+    font-size: 0.8rem;
+    color: #e63946;
+    font-weight: 600;
+  }
+
+  .member img {
+    width: 80px;
+    margin: 12px auto 0;
+    display: block;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+  }
+</style>
+<div class="about-hero">
+  <h1>⚙️ About ByteForge</h1>
+  <p>Byte Forge is my Final Project for pyhton lessons so It Was Great Experiance For Me!</p>
+</div>
+
+<div class="about-cards">
+  <div class="about-card">
+    <div class="icon">🛒</div>
+    <h3>Shop Parts</h3>
+    <p>Browse GPUs, CPUs, RAM, storage and more from top brands.</p>
+  </div>
+  <div class="about-card">
+    <div class="icon">🔧</div>
+    <h3>Build & Compare</h3>
+    <p>Create two builds side by side and compare scores and prices.</p>
+  </div>
+  <div class="about-card">
+    <div class="icon">⚡</div>
+    <h3>Best Value</h3>
+    <p>Find the best performance per dollar for your budget.</p>
+  </div>
+</div>
+
+<div class="about-team">
+  <h2>👥 Our Team</h2>
+  <div class="team-members">
+    <div class="member">
+      <div class="avatar">👨‍💻</div>
+      <h4>Gabriel-Shermadini</h4>
+      <span>Founder & Dev</span>
+    </div>
+    <div class="member">
+  
+      <h4>Main-Company</h4>
+      <span>TBC</span>
+      <img src="../static/images/tbc-logo.png" alt="">
+    </div>
+   
+  </div>
+</div>
+{% include 'footer.html' %}
+{% endblock %}

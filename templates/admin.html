@@ -1,0 +1,92 @@
+{% extends 'template.html' %}
+{% block content %}
+<div class="admin-page">
+    <h1>Admin panel</h1>
+
+    {% for part_type, products in [('gpu', gpus), ('cpu', cpus), ('board', boards), ('ram', rams),('psu', psus),('storage', storages)] %}
+    <div class="admin-section">
+        <div class="admin-section-header">
+            <h2>{{ part_type | upper }}</h2>
+            <a href="{{ url_for('admin_add', part_type=part_type) }}" class="admin-add-btn">+ Add</a>
+        </div>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Score</th>
+                    <th>Watt</th>
+                    <th>Year</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in products %}
+                <tr>
+                    <td><img src="{{ p.image_url }}" class="admin-thumb"></td>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.brand }}</td>
+                    <td> ₾{{ p.price }}</td>
+                    <td>{{ p.power_score }}</td>
+                    <td>{{ p.power_watt }}W</td>
+                    <td>{{ p.release_date }}</td>
+                    <td class="admin-actions">
+                        <a href="{{ url_for('admin_edit', part_type=part_type, part_id=p.id) }}" class="edit-btn">Edit</a>
+                        <a href="{{ url_for('admin_delete', part_type=part_type, part_id=p.id) }}" class="delete-btn" onclick="return confirm('Delete {{ p.name }}?')">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+       
+    </div>
+    {% endfor %}
+
+
+     <h1>Users</h1>
+         <table class="admin-table">
+            <thead>
+                <tr>
+                   
+                    <th>profiles</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Admin_Role</th>
+                    <th>Delete_User</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in users %}
+                <tr>
+                    <td><img src="../static/images/profile-icon-9.png" class="admin-thumb"></td>
+                    <td>{{ p.username }}</td>
+         
+                    <td>{{ "Admin" if p.is_admin else "User" }}</td>
+                     <td>
+    {% if not p.is_admin %}
+        <a href="{{ url_for('give_admin', user_id=p.id) }}" class="edit-btn"
+           onclick="return confirm('Give admin to {{ p.username }}?')">Give Admin</a>
+    {% else %}
+        <span style="color: gray;">Already Admin</span>
+    {% endif %}
+</td>
+<td>
+    {% if p.id != current_user.id %}
+        <a href="{{ url_for('del_user', user_id=p.id) }}" class="delete-btn"
+           onclick="return confirm('Delete {{ p.username }}?')">Delete User</a>
+    {% else %}
+        <span style="color: gray;">That's you</span>
+    {% endif %}
+</td>
+               
+              
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+{% include 'footer.html' %}
+{% endblock %}

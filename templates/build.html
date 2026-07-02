@@ -1,0 +1,335 @@
+{% extends 'template.html' %}
+{% block content %}
+
+<div class="build-page">
+    <h1>Compare Builds</h1>
+
+    <div class="compare-grid">
+        {% for build, slot, label in [(build_1, 1, 'Build 1'), (build_2, 2, 'Build 2')] %}
+        <div class="build-col">
+            
+            <h2>{{ label }}</h2>
+<img src="../static/images/example.png" alt="">
+         <!-- ვიდეოკარტა -->
+            <div class="build-slot">
+                <h3>GPU</h3>
+                {% if build.gpu %}
+                    <img src="{{ build.gpu.image_url }}" alt="{{ build.gpu.name }}">
+                    <div class="build-part-name">{{ build.gpu.name }}</div>
+                    <div class="build-part-stats">
+                        <span>Score: {{ build.gpu.power_score }}/10</span>
+                        <span>{{ build.gpu.power_watt }}W</span>
+                        <span>₾{{ build.gpu.price }}</span>
+                    </div>
+                    <a href="{{ url_for('remove_part', part_type='gpu', slot=slot) }}" class="remove-btn">Remove</a>
+                {% else %}
+                    <div class="empty-slot">
+                        No GPU
+                        <a href="{{ url_for('seed_gpus') }}">→ Pick one</a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- პროცესორები -->
+            <div class="build-slot">
+                <h3>CPU</h3>
+                {% if build.cpu %}
+                    <img src="{{ build.cpu.image_url }}" alt="{{ build.cpu.name }}">
+                    <div class="build-part-name">{{ build.cpu.name }}</div>
+                    <div class="build-part-stats">
+                        <span>Score: {{ build.cpu.power_score }}/10</span>
+                        <span>{{ build.cpu.power_watt }}W</span>
+                        <span> ₾{{ build.cpu.price }}</span>
+                    </div>
+                    <a href="{{ url_for('remove_part', part_type='cpu', slot=slot) }}" class="remove-btn">Remove</a>
+                {% else %}
+                    <div class="empty-slot">
+                        No CPU
+                        <a href="{{ url_for('seed_cpus') }}">→ Pick one</a>
+                    </div>
+                {% endif %}
+            </div>
+             <!-- დედადაფა -->
+            <div class="build-slot">
+                <h3>MotherBoard</h3>
+                {% if build.board %}
+                    <img src="{{ build.board.image_url }}" alt="{{ build.board.name }}">
+                    <div class="build-part-name">{{ build.board.name }}</div>
+                    <div class="build-part-stats">
+                        <span>Score: {{ build.board.power_score }}/10</span>
+                        <span>{{ build.board.power_watt }}W</span>
+                        <span> ₾{{ build.board.price }}</span>
+                    </div>
+                    <a href="{{ url_for('remove_part', part_type='board', slot=slot) }}" class="remove-btn">Remove</a>
+                {% else %}
+                    <div class="empty-slot">
+                        No Board
+                        <a href="{{ url_for('seed_boards') }}">→ Pick one</a>
+                    </div>
+                {% endif %}
+            </div>
+             <!-- რამი -->
+            <div class="build-slot">
+                <h3>Ram</h3>
+                {% if build.ram %}
+                    <img src="{{ build.ram.image_url }}" alt="{{ build.board.name }}">
+                    <div class="build-part-name">{{ build.board.name }}</div>
+                    <div class="build-part-stats">
+                        <span>Score: {{ build.ram.power_score }}/10</span>
+                        <span>{{ build.ram.power_watt }}W</span>
+                        <span> ₾{{ build.ram.price }}</span>
+                    </div>
+                    <a href="{{ url_for('remove_part', part_type='ram', slot=slot) }}" class="remove-btn">Remove</a>
+                {% else %}
+                    <div class="empty-slot">
+                        No Ram
+                        <a href="{{ url_for('seed_rams') }}">→ Pick one</a>
+                    </div>
+                {% endif %}
+            </div>
+             <!-- კვება -->
+            <div class="build-slot">
+                <h3>Power Suplly</h3>
+                {% if build.psu %}
+                    <img src="{{ build.psu.image_url }}" alt="{{ build.psu.name }}">
+                    <div class="build-part-name">{{ build.psu.name }}</div>
+                    <div class="build-part-stats">
+                        <span>Score: {{ build.psu.power_score }}/10</span>
+                        <span>{{ build.psu.power_watt }}W</span>
+                        <span> ₾{{ build.psu.price }}</span>
+                    </div>
+                    <a href="{{ url_for('remove_part', part_type='psu', slot=slot) }}" class="remove-btn">Remove</a>
+                {% else %}
+                    <div class="empty-slot">
+                        No Pcu
+                        <a href="{{ url_for('seed_pcu') }}">→ Pick one</a>
+                    </div>
+                {% endif %}
+            </div>
+             <!-- მეხსიერება -->
+            <div class="build-slot">
+                <h3>Power Suplly</h3>
+                {% if build.storage %}
+                    <img src="{{ build.storage.image_url }}" alt="{{ build.storage.name }}">
+                    <div class="build-part-name">{{ build.storage.name }}</div>
+                    <div class="build-part-stats">
+                        <span>Score: {{ build.storage.power_score }}/10</span>
+                        <span>{{ build.storage.power_watt }}W</span>
+                        <span> ₾{{ build.storage.price }}</span>
+                    </div>
+                    <a href="{{ url_for('remove_part', part_type='storage', slot=slot) }}" class="remove-btn">Remove</a>
+                {% else %}
+                    <div class="empty-slot">
+                        No Pcu
+                        <a href="{{ url_for('seed_storage') }}">→ Pick one</a>
+                    </div>
+                {% endif %}
+            </div>
+
+           <!-- შეჯამებააა -->
+            <div class="build-summary {{ 'winner' if build.total_score > (build_2.total_score if slot == 1 else build_1.total_score) else '' }}">
+                <div class="summary-row">
+                    <span>Total Score</span>
+                    <strong>{{ build.total_score }}/100</strong>
+                </div>
+                <div class="summary-row">
+                    <span>ფასი</span>
+                    <strong>{{ build.total_price }} ₾</strong>
+                </div>
+                <a href="{{ url_for('clear_build', slot=slot) }}" class="clear-btn">Clear</a>
+                <a href="{{url_for('add_build_to_cart',slot = slot)}}" class="cart-btn">Add To Cart</a>
+            </div>
+            <b>Game Perfomance</b> 
+            <div class="build-summary {{ 'winner' if build.total_score > (build_2.total_score if slot == 1 else build_1.total_score) else '' }}">
+               {% if build.gpu and build.cpu and build.board and build.storage and build.psu and build.ram %}
+                <div class="summary-row1">
+                    <img src="../static/images/cs2.png" class="gameU" alt="">
+                   {% if build.total_score <= 0   %}
+                    <strong>
+                        0FPS
+                    </strong>   
+                      {% elif build.total_score <= 10 %}
+                          <strong>
+                        17-34~FPS
+                    </strong>  
+                     {% elif build.total_score <= 20 %}
+                          <strong>
+                        25-42~FPS
+                    </strong>    
+                             {% elif build.total_score <= 25 %}
+                          <strong>
+                        32-62~FPS
+                    </strong>  
+                      {% elif build.total_score <= 30 %}
+                          <strong>
+                        38-72~FPS
+                    </strong>    
+                     {% elif build.total_score <= 35 %}
+                          <strong>
+                        48-82~FPS
+                    </strong>   
+                     {% elif build.total_score <= 40 %}
+                          <strong>
+                        60-104~FPS
+                    </strong>
+                      {% elif build.total_score <= 45 %}
+                          <strong>
+                        68-124~FPS
+                    </strong>
+                     {% elif build.total_score <= 52 %}
+                          <strong>
+                        72-144~FPS
+                    </strong>            
+                     {% else %}
+                          <strong>
+                        200+FPS
+                    </strong>   
+                     {% endif %}
+                </div>
+                
+                <div class="summary-row1">
+                    <img src="../static/images/lo.png" class="gameU" alt="">
+                   {% if build.total_score <= 0   %}
+                    <strong>
+                        0FPS
+                    </strong>   
+                             {% elif build.total_score <= 15 %}
+                          <strong>
+                        35-65~FPS
+                    </strong>   
+                     {% elif build.total_score <= 25 %}
+                          <strong>
+                        75-155~FPS
+                    </strong>  
+                     {% elif build.total_score <= 45 %}
+                          <strong>
+                        83-195~FPS
+                    </strong>  
+                     {% elif build.total_score <= 55 %}
+                          <strong>
+                        100-210~FPS
+                    </strong>      
+                     {% else %}
+                          <strong>
+                        300+FPS
+                    </strong>   
+                     {% endif %}
+                </div>
+                    <div class="summary-row1">
+                    <img src="../static/images/rust.png" class="gameU" alt="">
+                   {% if build.total_score <= 0   %}
+                    <strong>
+                        0FPS
+                    </strong>   
+                             {% elif build.total_score <= 25 %}
+                          <strong>
+                        25-45~FPS
+                    </strong>
+                      {% elif build.total_score <= 30 %}
+                          <strong>
+                        30-55~FPS
+                    </strong>      
+                     {% elif build.total_score <= 35 %}
+                          <strong>
+                        55-95~FPS
+                    </strong> 
+                     {% elif build.total_score <= 42 %}
+                          <strong>
+                        70-120~FPS
+                    </strong>
+                     {% elif build.total_score <= 52 %}
+                          <strong>
+                        80-150~FPS
+                    </strong>          
+                     {% else %}
+                          <strong>
+                        220+FPS
+                    </strong>   
+                     {% endif %}
+                </div>
+                        <div class="summary-row1">
+                    <img src="../static/images/gta-v-green-4.png" class="gameU" alt="">
+                   {% if build.total_score <= 0   %}
+                    <strong>
+                        0FPS
+                    </strong>   
+                             {% elif build.total_score <= 20 %}
+                          <strong>
+                        25-55~FPS
+                    </strong>   
+                      {% elif build.total_score <= 30 %}
+                          <strong>
+                        35-65~FPS
+                    </strong>   
+                     {% elif build.total_score <= 35 %}
+                          <strong>
+                        75-95~FPS
+                    </strong>
+                     {% elif build.total_score <= 42 %}
+                          <strong>
+                        90-125~FPS
+                    </strong> 
+                     {% elif build.total_score <= 50 %}
+                          <strong>
+                        120-165~FPS
+                    </strong>           
+                     {% else %}
+                          <strong>
+                        200+FPS
+                    </strong>   
+                     {% endif %}
+                </div>
+                    <div class="summary-row1">
+                    <img src="../static/images/pupg.png" class="gameU" alt="">
+                   {% if build.total_score <= 0   %}
+                    <strong>
+                        0FPS
+                    </strong>   
+                             {% elif build.total_score <= 25 %}
+                          <strong>
+                        27-52~FPS
+                    </strong>   
+                     {% elif build.total_score <= 35 %}
+                          <strong>
+                        59-155~FPS
+                    </strong>   
+                     {% else %}
+                          <strong>
+                        180+FPS
+                    </strong>   
+                     {% endif %}
+                </div>
+             
+  {% else %}
+
+        <div class="empty-slot">
+            Complete your build to see FPS estimates
+        </div>
+
+    {% endif %}
+
+        </li>
+                   <!-- {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link ">LogOut</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="/login" class="nav-link ">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/register" class="nav-link ">Register</a>
+                    </li>
+                    {% endif %} -->
+
+            </div>
+
+        </div>
+         {% endfor %}
+    </div>
+     
+     
+</div>
+
+{% include 'footer.html' %}
+{% endblock %}
