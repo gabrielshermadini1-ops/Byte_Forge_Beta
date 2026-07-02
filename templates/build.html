@@ -108,7 +108,7 @@
             </div>
              <!-- მეხსიერება -->
             <div class="build-slot">
-                <h3>Ram</h3>
+                <h3>Storage</h3>
                 {% if build.storage %}
                     <img src="{{ build.storage.image_url }}" alt="{{ build.storage.name }}">
                     <div class="build-part-name">{{ build.storage.name }}</div>
@@ -120,7 +120,7 @@
                     <a href="{{ url_for('remove_part', part_type='storage', slot=slot) }}" class="remove-btn">Remove</a>
                 {% else %}
                     <div class="empty-slot">
-                        No Ram
+                        No Storage
                         <a href="{{ url_for('seed_storage') }}">→ Pick one</a>
                     </div>
                 {% endif %}
